@@ -9,8 +9,8 @@ from click_stream import Stream
 
 @click.command()
 @click.option('--in', type=Stream())
-def streamcli(in):
-    click.echo(in.read())
+def streamcli(inp):
+    click.echo(inp.read())
 ```
 
 ## Supported inputs
