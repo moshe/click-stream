@@ -2,9 +2,11 @@ import click
 import os
 try:
     from urlparse import urlparse
-except ImportError:
+    from urllib import urlopen
+except ImportError:  # Python3
     from urllib.parse import urlparse
-from urllib import urlopen
+    from urllib.request import urlopen
+
 import sys
 
 __url__ = 'https://github.com/moshe/click-stream'
