@@ -24,7 +24,7 @@ class Stream(click.ParamType):
         if value == '-':
             return sys.stdin
         if os.path.exists(value):
-            return file(value, self.file_mode)
+            return open(value, self.file_mode)
         url = urlparse(value)
         if url.scheme not in self.SUPPORTED_SCHEMES:
             self.fail('%s scheme is not supported' % url.scheme)
