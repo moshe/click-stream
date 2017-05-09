@@ -1,11 +1,15 @@
 import click
 import os
+import gzip
+
 try:
     from urlparse import urlparse
     from urllib import urlopen
+    PY_VERSION = 2
 except ImportError:  # Python3
     from urllib.parse import urlparse
     from urllib.request import urlopen
+    PY_VERSION = 3
 
 import sys
 
@@ -29,4 +33,9 @@ class Stream(click.ParamType):
         if url.scheme not in self.SUPPORTED_SCHEMES:
             self.fail('%s scheme is not supported' % url.scheme)
         if url.scheme in ('http', 'https'):
+            if value.endswith('.gz'):
+                if PY_VERSION == 2:
+                    self.fail('gz file format not supported in python 2')
+                else:
+                    return gzip.GzipFile(mode='r', fileobj=urlopen(value))
             return urlopen(value)
