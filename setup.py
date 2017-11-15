@@ -9,16 +9,13 @@ except Exception:
 setup(
     name='click-stream',
     author='Moshe Zada',
-    version='0.0.5',
+    version='0.0.6',
     keywords=['click', 'stream', 'cli', 'url'],
     url='https://github.com/Moshe/click-stream',
     py_modules=['click_stream'],
     license='',
     long_description=long_description,
     description='Click option type for http/https/file inputs',
-    install_requires=[
-        'click'
-    ],
     tests_require=[
         'pytest'
     ]
