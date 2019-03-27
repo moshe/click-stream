@@ -9,7 +9,7 @@ except Exception:
 setup(
     name='click-stream',
     author='Moshe Zada',
-    version='0.0.7',
+    version='0.0.8',
     keywords=['click', 'stream', 'cli', 'url'],
     url='https://github.com/Moshe/click-stream',
     py_modules=['click_stream'],
