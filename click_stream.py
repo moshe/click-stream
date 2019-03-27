@@ -15,7 +15,7 @@ except ImportError:  # Python3
 
 
 __url__ = 'https://github.com/moshe/click-stream'
-__version__ = '0.0.2'
+__version__ = '0.0.7'
 
 
 class Stream(click.ParamType):
