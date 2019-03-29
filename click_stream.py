@@ -15,7 +15,7 @@ except ImportError:  # Python3
 
 
 __url__ = 'https://github.com/moshe/click-stream'
-__version__ = '0.0.9'
+__version__ = '0.0.10'
 
 
 class Stream(click.ParamType):
@@ -34,9 +34,9 @@ class Stream(click.ParamType):
             kwargs = {}
             if self.file_mode == 'rb':
                 pass
-            elif self.encoding is not None:
+            elif self.encoding is not None and PY_VERSION != 2:
                 kwargs['encoding'] = self.encoding
-            elif ctx.obj and ctx.obj.get('encoding'):
+            elif ctx.obj and ctx.obj.get('encoding') and PY_VERSION != 2:
                 kwargs['encoding'] = ctx.obj.get('encoding')
             return open(value, self.file_mode, **kwargs)
         url = urlparse(value)
