@@ -15,22 +15,28 @@ except ImportError:  # Python3
 
 
 __url__ = 'https://github.com/moshe/click-stream'
-__version__ = '0.0.8'
+__version__ = '0.0.9'
 
 
 class Stream(click.ParamType):
     name = 'stream'
     SUPPORTED_SCHEMES = ('http', 'https')
 
-    def __init__(self, file_mode='r'):
+    def __init__(self, file_mode='r', encoding=None):
         self.file_mode = file_mode
+        self.encoding = encoding
 
     def convert(self, value, param, ctx):
+        print(ctx.obj)
         if value == '-':
             return sys.stdin
         if os.path.exists(value):
             kwargs = {}
-            if ctx.obj and ctx.obj.get('encoding'):
+            if self.file_mode == 'rb':
+                pass
+            elif self.encoding is not None:
+                kwargs['encoding'] = self.encoding
+            elif ctx.obj and ctx.obj.get('encoding'):
                 kwargs['encoding'] = ctx.obj.get('encoding')
             return open(value, self.file_mode, **kwargs)
         url = urlparse(value)
